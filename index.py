@@ -97,6 +97,19 @@ def get_hadith(filename, max_id, id=None):
     return jsonify({"data": d})
 
 
+@app.route("/random", methods=["GET"])
+def random_hadith():
+    books = [
+        ("muslim.json", 3034),
+        ("bukhari.json", 7564),
+        ("abudawud.json", 3998),
+        ("ibnmajah.json", 4342),
+        ("tirmidhi.json", 3956),
+    ]
+    selected_book_file, max_id = random.choice(books)
+    return get_hadith(selected_book_file, max_id)
+
+
 @app.route("/muslim/")
 @app.route("/muslim/<int:id>", methods=["GET"])
 def muslim(id=None):
